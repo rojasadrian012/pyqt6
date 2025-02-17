@@ -2,7 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMessageBox
 
 from model.product import Product as ProductModel
-from api.product import Product as ProductApi
+from api.productRepository import ProductRepository
 
 class NewProduct:
     def __init__(self):
@@ -55,7 +55,7 @@ class NewProduct:
                 int(price),
                 self.vNewProduct.chkIsImported.isChecked()
             )
-            productApi = ProductApi()
+            productApi = ProductRepository()
             if productApi.save(product):
                 QMessageBox.information(
                     self.vNewProduct,
