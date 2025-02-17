@@ -36,7 +36,7 @@ class Main(QMainWindow):
             self.tblProducts.setItem(row, 1, QTableWidgetItem(str(product.description)))
             self.tblProducts.setItem(row, 2, QTableWidgetItem(str(product.category)))
             self.tblProducts.setItem(row, 3, QTableWidgetItem(str(product.price)))
-            self.tblProducts.setItem(row, 4, QTableWidgetItem(str(product.isImported)))
+            self.tblProducts.setItem(row, 4, QTableWidgetItem(product.isImported and "Si" or "No"))
 
     def filterTable(self, text):
         # Muestra solo las filas que contienen el texto en alguna de sus celdas
