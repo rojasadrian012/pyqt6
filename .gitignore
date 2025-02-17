@@ -1,0 +1,53 @@
+# Archivos y carpetas de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de entorno virtual
+venv/
+env/
+ENV/
+*.venv
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
+*.iml
+
+# Archivos de dependencias y compilación
+*.egg-info/
+*.egg
+*.pyo
+*.pyd
+*.whl
+*.so
+
+# Archivos de logs y bases de datos temporales
+*.log
+*.sqlite3
+db.sqlite3
+
+# Archivos de caché y configuración de paquetes
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Archivos de compilación de Cython
+*.c
+*.cpp
+
+# Configuración de sistema y permisos
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de lock y dependencias específicas
+Pipfile.lock
+poetry.lock
+
+# Archivos de despliegue y entornos en la nube
+.env
+*.env
+*.secret
