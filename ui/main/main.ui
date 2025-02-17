@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>807</width>
-    <height>596</height>
+    <width>948</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,10 +18,7 @@
     <normaloff>C:/Users/Adrian/Downloads/inventario-disponible.png</normaloff>C:/Users/Adrian/Downloads/inventario-disponible.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
+   <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -34,7 +31,7 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item>
+    <item row="0" column="0">
      <widget class="QFrame" name="frame">
       <property name="styleSheet">
        <string notr="true"/>
@@ -49,9 +46,9 @@
        <property name="geometry">
         <rect>
          <x>290</x>
-         <y>120</y>
-         <width>511</width>
-         <height>192</height>
+         <y>130</y>
+         <width>531</width>
+         <height>291</height>
         </rect>
        </property>
        <column>
@@ -83,8 +80,8 @@
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>220</y>
+         <x>40</x>
+         <y>270</y>
          <width>221</width>
          <height>41</height>
         </rect>
@@ -100,65 +97,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700; color:#000000;&quot;&gt;Lista de productos&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QFrame" name="frame_2">
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>340</y>
-         <width>455</width>
-         <height>46</height>
-        </rect>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>432</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnUpdateTable">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(0, 0, 0);
-border-radius: 10px;
-border: none;
-background-color: rgb(85, 85, 255);</string>
-          </property>
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>130</y>
-         <width>91</width>
+         <y>190</y>
+         <width>81</width>
          <height>81</height>
         </rect>
        </property>
@@ -184,6 +128,60 @@ background-color: rgb(85, 85, 255);</string>
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QPushButton" name="btnUpdateTable">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>430</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+border-radius: 10px;
+border: none;
+background-color: rgb(85, 85, 255);</string>
+       </property>
+       <property name="text">
+        <string>Actualizar</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="qleSearch">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>100</y>
+         <width>531</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>Escriba un producto</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>80</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>  Buscar</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -193,7 +191,7 @@ background-color: rgb(85, 85, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>807</width>
+     <width>948</width>
      <height>33</height>
     </rect>
    </property>

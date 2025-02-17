@@ -32,11 +32,29 @@ class ProductRepository:
             rows = cursor.fetchall()
             products = []
             for row in rows:
-                product = Product(row[1], row[2], row[3], row[4], row[5])
+                product = Product(row[1], row[2], row[3], row[4], row[5], row[0])  # Ahora incluye el id
                 products.append(product)
             return products
         except Exception as e:
             print("Error al obtener los productos:", e)
             return [] 
+        finally:
+            db.close()
+
+    def update(self, product: Product) -> bool:
+        db = con.Connection().connectDatabase()
+        try:
+            cursor = db.cursor()
+            query = """
+                UPDATE products
+                SET name = ?, description = ?, category = ?, price = ?, isImported = ?
+                WHERE id = ?;
+            """
+            cursor.execute(query, (product.name, product.description, product.category, product.price, product.isImported, product.id))
+            db.commit()
+            return True
+        except Exception as e:
+            print("Error al actualizar el producto:", e)
+            return False
         finally:
             db.close()
