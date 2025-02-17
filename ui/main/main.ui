@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>948</width>
-    <height>612</height>
+    <width>1114</width>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>C:/Users/Adrian/Downloads/inventario-disponible.png</normaloff>C:/Users/Adrian/Downloads/inventario-disponible.png</iconset>
+    <normaloff>../Downloads/inventario-disponible.png</normaloff>../Downloads/inventario-disponible.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -34,7 +34,7 @@
     <item row="0" column="0">
      <widget class="QFrame" name="frame">
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -51,29 +51,58 @@
          <height>291</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QHeaderView::section {
+    background-color: rgba(170, 255, 200, 0.8); /* Verde pastel más suave */
+    color: rgb(0, 0, 0); 
+    padding: 5px;
+    font-size: 10pt;
+    font-weight: 700;
+}
+
+QHeaderView::section:hover {
+    background-color: rgba(170, 255, 200, 0.6); /* Un poco más transparente al pasar el mouse */
+}
+</string>
+       </property>
        <column>
         <property name="text">
          <string>Nombre</string>
         </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Nueva columna</string>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
         </property>
        </column>
        <column>
         <property name="text">
          <string>Descripción</string>
         </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
        </column>
        <column>
         <property name="text">
          <string>Categoria</string>
         </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
        </column>
        <column>
         <property name="text">
-         <string>Es importado</string>
+         <string>Precio</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>¿Importado?</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
         </property>
        </column>
       </widget>
@@ -122,7 +151,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>C:/Users/Adrian/Downloads/inventario.png</pixmap>
+        <pixmap>../Downloads/inventario.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -147,10 +176,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">background-color: rgb(85, 255, 127);
+color: rgb(0, 0, 0);
 border-radius: 10px;
-border: none;
-background-color: rgb(85, 85, 255);</string>
+border: none;</string>
        </property>
        <property name="text">
         <string>Actualizar</string>
@@ -160,10 +189,16 @@ background-color: rgb(85, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>290</x>
-         <y>100</y>
+         <y>90</y>
          <width>531</width>
-         <height>22</height>
+         <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+border: none;
+border: 1px solid #000000;;
+border-radius: 2px;</string>
        </property>
        <property name="placeholderText">
         <string>Escriba un producto</string>
@@ -173,15 +208,21 @@ background-color: rgb(85, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>290</x>
-         <y>80</y>
-         <width>49</width>
-         <height>16</height>
+         <y>60</y>
+         <width>91</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
-        <string>  Buscar</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;  Buscar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
+      <zorder>tblProducts</zorder>
+      <zorder>label_5</zorder>
+      <zorder>label</zorder>
+      <zorder>btnUpdateTable</zorder>
+      <zorder>label_2</zorder>
+      <zorder>qleSearch</zorder>
      </widget>
     </item>
    </layout>
@@ -191,7 +232,7 @@ background-color: rgb(85, 85, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>948</width>
+     <width>1114</width>
      <height>33</height>
     </rect>
    </property>
