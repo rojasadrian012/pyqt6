@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtWidgets import QTableWidgetItem
 
 from api.productRepository import ProductRepository
-from ui.main.components.newProduct.newProduct import NewProduct
+from ui.main.components.viewProduct.viewProduct import ViewProduct
 
 class Main(QMainWindow):
     def __init__(self):
@@ -23,7 +23,7 @@ class Main(QMainWindow):
         self.qleSearch.textChanged.connect(self.filterTable)  # Conexión para el filtrado
 
     def openNewProduct(self):
-        self.newProduct = NewProduct()
+        self.newProduct = ViewProduct()
 
     def updateTable(self):
         self.products = ProductRepository().getAll()  # Obtenemos la lista completa
@@ -52,4 +52,4 @@ class Main(QMainWindow):
     def openDetailProduct(self, row, column):
     # Obtenemos el producto seleccionado usando el índice de la fila
         product = self.products[row]
-        self.detailProduct = NewProduct(product)
+        self.detailProduct = ViewProduct(product)
