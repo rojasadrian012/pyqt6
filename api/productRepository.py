@@ -1,10 +1,10 @@
 
 from model.product import Product
-import data.connection as con
+import api.connectionRepository as con
 
 class ProductRepository:
     def save(self, product: "ProductRepository") -> bool:
-        db = con.Connection().connectDatabase()
+        db = con.ConnectionRepository().connectDatabase()
         try:
             cursor = db.cursor()
             query = """
@@ -21,7 +21,7 @@ class ProductRepository:
             db.close()
 
     def getAll(self) -> list[Product]:
-        db = con.Connection().connectDatabase()
+        db = con.ConnectionRepository().connectDatabase()
         try:
             cursor = db.cursor()
             query = """
@@ -42,7 +42,7 @@ class ProductRepository:
             db.close()
 
     def update(self, product: Product) -> bool:
-        db = con.Connection().connectDatabase()
+        db = con.ConnectionRepository().connectDatabase()
         try:
             cursor = db.cursor()
             query = """

@@ -1,9 +1,9 @@
 from model.user import User
-import data.connection as con
+import api.connectionRepository as con
 
-class Auth:       
+class AuthRepository:       
     def authenticate(self, user: User) -> User | None:
-        db = con.Connection().connectDatabase()
+        db = con.ConnectionRepository().connectDatabase()
         try:
             cursor = db.cursor()
             query = """

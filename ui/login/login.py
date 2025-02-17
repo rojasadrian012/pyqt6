@@ -1,7 +1,7 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMessageBox
 
-from api.auth import Auth
+from api.authRepository import AuthRepository
 from model.user import User
 from ui.main.main import Main
 
@@ -28,7 +28,7 @@ class Login:
             self.login.txtPassword.setFocus()
         else:
             user = User(user=user, password=password)
-            auth = Auth()
+            auth = AuthRepository()
             result = auth.authenticate(user)
             if result:
                 self.main = Main()

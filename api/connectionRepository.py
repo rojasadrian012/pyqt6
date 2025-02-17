@@ -1,6 +1,6 @@
 import sqlite3
 
-class Connection():
+class ConnectionRepository():
     def __init__(self):
         try:
             self.con = sqlite3.connect('data/database.db')
