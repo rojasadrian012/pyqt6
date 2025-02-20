@@ -51,3 +51,6 @@ poetry.lock
 .env
 *.env
 *.secret
+
+# Base de datos SqlLite
+database.db
