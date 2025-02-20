@@ -61,8 +61,31 @@
     </property>
     <addaction name="btnListProducts"/>
     <addaction name="btnNewProduct"/>
+    <addaction name="actionImportar_productos"/>
+    <addaction name="actionExportar_productos"/>
+    <addaction name="actionGenerar_reporte"/>
+    <addaction name="actionCrear_copia_de_seguridad"/>
+    <addaction name="action_Restaurar_copia_de_seguridad"/>
+    <addaction name="actionConfiguraci_n"/>
+    <addaction name="actionSalir"/>
+   </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionAlertas_de_stock"/>
+    <addaction name="actionEstad_sticas_de_productos"/>
+   </widget>
+   <widget class="QMenu" name="menuAyuda">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="actionGu_a_del_usuario"/>
+    <addaction name="actionAcerca_de"/>
    </widget>
    <addaction name="menuArchive"/>
+   <addaction name="menuHerramientas"/>
+   <addaction name="menuAyuda"/>
   </widget>
   <action name="btnNewProduct">
    <property name="icon">
@@ -86,6 +109,61 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionImportar_productos">
+   <property name="text">
+    <string>Importar productos</string>
+   </property>
+  </action>
+  <action name="actionExportar_productos">
+   <property name="text">
+    <string>Exportar productos</string>
+   </property>
+  </action>
+  <action name="actionGenerar_reporte">
+   <property name="text">
+    <string>Generar reporte</string>
+   </property>
+  </action>
+  <action name="actionCrear_copia_de_seguridad">
+   <property name="text">
+    <string>Crear copia de seguridad</string>
+   </property>
+  </action>
+  <action name="action_Restaurar_copia_de_seguridad">
+   <property name="text">
+    <string> Restaurar copia de seguridad</string>
+   </property>
+  </action>
+  <action name="actionConfiguraci_n">
+   <property name="text">
+    <string>Configuración</string>
+   </property>
+  </action>
+  <action name="actionSalir">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </action>
+  <action name="actionAlertas_de_stock">
+   <property name="text">
+    <string>Alertas de stock</string>
+   </property>
+  </action>
+  <action name="actionEstad_sticas_de_productos">
+   <property name="text">
+    <string>Estadísticas de productos</string>
+   </property>
+  </action>
+  <action name="actionGu_a_del_usuario">
+   <property name="text">
+    <string>Guía del usuario</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de</string>
    </property>
   </action>
  </widget>
