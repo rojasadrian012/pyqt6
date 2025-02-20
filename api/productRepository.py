@@ -35,7 +35,7 @@ class ProductRepository:
             rows = cursor.fetchall()
             products = []
             for row in rows:
-                product = Product(row[1], row[2], row[3], row[4], row[5], row[0], row[6]) 
+                product = Product(row[0], row[1], row[2], row[3], row[4], row[5], row[6]) 
                 products.append(product)
             return products
         except Exception as e:

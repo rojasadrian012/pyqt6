@@ -52,12 +52,12 @@ class ViewProduct:
             return 
 
         self.product = ProductModel(
+            None,  
             name,
             description,
             category,
             int(price),
             self.viewProduct.chkIsImported.isChecked(),
-            None,  
             int(quantity)
         )
 
