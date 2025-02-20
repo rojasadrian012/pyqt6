@@ -7,14 +7,11 @@ from api.productRepository import ProductRepository
 
 class ViewProduct:
     def __init__(self, product=None):
-        # Si se pasa un producto, se entra en modo edición (detalle)
         self.product = product
         
-        # Carga la interfaz de usuario
         self.viewProduct = uic.loadUi("ui/main/components/viewProduct/viewProduct.ui")
         self.initUi()
         
-        # Si hay un producto, cargar sus datos en la interfaz
         if self.product:
             self.loadProductData()
             self.viewProduct.lblProductViewTitle.setText("Editar Producto")
@@ -30,96 +27,91 @@ class ViewProduct:
     
     def initUi(self):
         if self.product:
-            # Modo edición: cambiar texto del botón y conectar a la función de actualización
             self.viewProduct.btnSaveProduct.setText("Actualizar")
             self.viewProduct.btnSaveProduct.clicked.connect(self.updateProduct)
         else:
-            # Modo creación: se conecta la función para guardar un nuevo producto
             self.viewProduct.btnSaveProduct.clicked.connect(self.saveProduct)
     
     def loadProductData(self):
-        """Carga los datos del producto en los campos de la interfaz."""
         self.viewProduct.txtProductoName.setText(self.product.name)
-        # Se corrige el nombre del widget de descripción:
         self.viewProduct.txtProductDescription.setText(self.product.description)
         self.viewProduct.cbxProductCategory.setCurrentText(self.product.category)
         self.viewProduct.txtProductoPrice.setText(str(self.product.price))
         self.viewProduct.chkIsImported.setChecked(self.product.isImported)
+        self.viewProduct.txtProductQuantity.setText(str(self.product.quantity))
     
     def saveProduct(self):
-        """Guarda un nuevo producto en la base de datos."""
         name = self.viewProduct.txtProductoName.text()
-        # Se corrige el nombre del widget de descripción:
         description = self.viewProduct.txtProductDescription.text()
         category = self.viewProduct.cbxProductCategory.currentText()
         price = self.viewProduct.txtProductoPrice.text()
+        quantity = self.viewProduct.txtProductQuantity.text()
 
-        color = "color: red;"
+        if not self.validateFields(name, description, category, price, quantity):
+            print("ifff")
+            return 
 
-        # Reiniciar mensajes de error
-        self.viewProduct.errProductoName.setStyleSheet(color)
-        self.viewProduct.errProductoName.setText("")
-        self.viewProduct.errProductDescription.setStyleSheet(color)
-        self.viewProduct.errProductDescription.setText("")
-        self.viewProduct.errProductCategory.setStyleSheet(color)
-        self.viewProduct.errProductCategory.setText("")
-        self.viewProduct.errProductoPrice.setStyleSheet(color)
-        self.viewProduct.errProductoPrice.setText("")
+        self.product = ProductModel(
+            name,
+            description,
+            category,
+            int(price),
+            self.viewProduct.chkIsImported.isChecked(),
+            None,  
+            int(quantity)
+        )
 
-        # Validaciones
-        if len(name) < 2:
-            self.viewProduct.errProductoName.setText("Escriba un nombre válido.")
-            self.viewProduct.txtProductoName.setFocus()
-        elif len(description) < 2:
-            self.viewProduct.errProductDescription.setText("Escriba una descripción válida.")
-            self.viewProduct.txtProductDescription.setFocus()
-        elif category == "--- Selecione una opcción":
-            self.viewProduct.errProductCategory.setText("Seleccione una categoría.")
-            self.viewProduct.cbxProductCategory.setFocus()
-        elif not price.isnumeric():
-            self.viewProduct.errProductoPrice.setText("El precio debe ser un número.")
-            self.viewProduct.txtProductoPrice.setText("0")
-            self.viewProduct.txtProductoPrice.setFocus()
-        elif int(price) < 1:
-            self.viewProduct.errProductoPrice.setText("El precio debe ser mayor a cero.")
-            self.viewProduct.txtProductoPrice.setFocus()
-        else:
-            # Crear el objeto producto nuevo
-            product = ProductModel(
-                name,
-                description,
-                category,
-                int(price),
-                self.viewProduct.chkIsImported.isChecked()
+        productApi = ProductRepository()
+        if productApi.save(self.product):
+            QMessageBox.information(
+                self.viewProduct,
+                "Producto Guardado",
+                "El producto se ha guardado correctamente.",
+                QMessageBox.StandardButton.Ok
             )
-            productApi = ProductRepository()
-            if productApi.save(product):
-                QMessageBox.information(
-                    self.viewProduct,
-                    "Producto Guardado",
-                    "El producto se ha guardado correctamente.",
-                    QMessageBox.StandardButton.Ok
-                )
-            else:
-                QMessageBox.critical(
-                    self.viewProduct,
-                    "Error",
-                    "Hubo un problema al guardar el producto.",
-                    QMessageBox.StandardButton.Ok
-                )
             self.viewProduct.hide()
-
+        else:
+            QMessageBox.critical(
+                self.viewProduct,
+                "Error",
+                "Hubo un problema al guardar el producto.",
+                QMessageBox.StandardButton.Ok
+            )
     def updateProduct(self):
-        """Actualiza los datos de un producto existente."""
         name = self.viewProduct.txtProductoName.text()
-        # Se corrige el nombre del widget de descripción:
         description = self.viewProduct.txtProductDescription.text()
         category = self.viewProduct.cbxProductCategory.currentText()
         price = self.viewProduct.txtProductoPrice.text()
+        quantity = self.viewProduct.txtProductQuantity.text()
 
+        if not self.validateFields(name, description, category, price, quantity):
+            return 
+
+        self.product.name = name
+        self.product.description = description
+        self.product.category = category
+        self.product.price = int(price)
+        self.product.isImported = self.viewProduct.chkIsImported.isChecked()
+        self.product.quantity = quantity
+
+        productApi = ProductRepository()
+        if productApi.update(self.product):
+            QMessageBox.information(
+                self.viewProduct,
+                "Producto Actualizado",
+                "El producto se ha actualizado correctamente.",
+                QMessageBox.StandardButton.Ok
+            )
+            self.viewProduct.hide()
+        else:
+            QMessageBox.critical(
+                self.viewProduct,
+                "Error",
+                "Hubo un problema al actualizar el producto.",
+                QMessageBox.StandardButton.Ok
+            )
+    def validateFields(self, name, description, category, price, quantity):
         color = "color: red;"
-
-        # Reiniciar mensajes de error
         self.viewProduct.errProductoName.setStyleSheet(color)
         self.viewProduct.errProductoName.setText("")
         self.viewProduct.errProductDescription.setStyleSheet(color)
@@ -128,45 +120,34 @@ class ViewProduct:
         self.viewProduct.errProductCategory.setText("")
         self.viewProduct.errProductoPrice.setStyleSheet(color)
         self.viewProduct.errProductoPrice.setText("")
+        self.viewProduct.errProductQuantity.setStyleSheet(color)
+        self.viewProduct.errProductQuantity.setText("")
 
-        # Validaciones (similares a las de guardado)
+        errors = False
+
         if len(name) < 2:
             self.viewProduct.errProductoName.setText("Escriba un nombre válido.")
             self.viewProduct.txtProductoName.setFocus()
-        elif len(description) < 2:
+            errors = True
+        if len(description) < 2:
             self.viewProduct.errProductDescription.setText("Escriba una descripción válida.")
-            self.viewProduct.txtProductDescription.setFocus()
-        elif category == "--- Selecione una opcción":
+            errors = True
+        if category == "--- Selecione una opcción":
             self.viewProduct.errProductCategory.setText("Seleccione una categoría.")
-            self.viewProduct.cbxProductCategory.setFocus()
-        elif not price.isnumeric():
+            errors = True
+        if not price.isnumeric():
             self.viewProduct.errProductoPrice.setText("El precio debe ser un número.")
             self.viewProduct.txtProductoPrice.setText("0")
-            self.viewProduct.txtProductoPrice.setFocus()
+            errors = True
         elif int(price) < 1:
             self.viewProduct.errProductoPrice.setText("El precio debe ser mayor a cero.")
-            self.viewProduct.txtProductoPrice.setFocus()
-        else:
-            # Actualizar el objeto producto con los nuevos datos
-            self.product.name = name
-            self.product.description = description
-            self.product.category = category
-            self.product.price = int(price)
-            self.product.isImported = self.viewProduct.chkIsImported.isChecked()
+            errors = True
+        if not quantity.isnumeric():
+            self.viewProduct.errProductQuantity.setText("La cantidad debe ser un número.")
+            self.viewProduct.txtProductQuantity.setText("0")
+            errors = True
+        elif int(quantity) < 1:
+            self.viewProduct.errProductQuantity.setText("La cantidad debe ser mayor a cero.")
+            errors = True
 
-            productApi = ProductRepository()
-            if productApi.update(self.product):
-                QMessageBox.information(
-                    self.viewProduct,
-                    "Producto Actualizado",
-                    "El producto se ha actualizado correctamente.",
-                    QMessageBox.StandardButton.Ok
-                )
-            else:
-                QMessageBox.critical(
-                    self.viewProduct,
-                    "Error",
-                    "Hubo un problema al actualizar el producto.",
-                    QMessageBox.StandardButton.Ok
-                )
-            self.viewProduct.hide()
+        return not errors 

@@ -3,7 +3,7 @@ import api.connectionRepository as con
 
 class AuthRepository:       
     def authenticate(self, user: User) -> User | None:
-        db = con.ConnectionRepository().connectDatabase()
+        db = con.ConnectionRepository().connexionDatabase()
         try:
             cursor = db.cursor()
             query = """
